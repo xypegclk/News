@@ -14,6 +14,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var tableview: UITableView!
     
+    var row: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -31,10 +33,21 @@ class ViewController: UIViewController {
             self.tableview.reloadData()
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "site" {
+            if let articleSiteVC = segue.destination as? articleSiteViewController {
+                if let indexPath = tableview.indexPathForSelectedRow{
+                    articleSiteVC.url = newViewModels[indexPath.row].url
+                }
+            }
+        }
+    }
 
 }
 
-extension ViewController: UITableViewDataSource {
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         newViewModels.count
     }
@@ -47,5 +60,10 @@ extension ViewController: UITableViewDataSource {
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //self.performSegue(withIdentifier: "site", sender: indexPath)
+    }
+    
 }
 

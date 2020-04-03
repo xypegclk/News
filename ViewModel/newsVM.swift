@@ -10,7 +10,7 @@ import Foundation
 
 struct NewsViewModel {
     
-    let author: String
+    //let author: String
     let title: String
     let description: String
     let url: String
@@ -20,7 +20,7 @@ struct NewsViewModel {
     
     init(article: Article) {
         
-        self.author = article.author!
+        //self.author = article.author!
         self.title = article.title!
         self.description = article.description!
         self.url = article.url!
